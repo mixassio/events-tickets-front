@@ -7,10 +7,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     height: '100vh',
   },
-  form: {
-    width: '75%',
-    marginTop: theme.spacing(1),
-  },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
@@ -20,7 +16,7 @@ export default ({ handleSubmit }: any) => {
   const classes = useStyles();
 
   return (
-          <form className={classes.form} onSubmit={handleSubmit} noValidate>
+          <form onSubmit={handleSubmit} noValidate>
             <TextField
               variant="outlined"
               margin="normal"

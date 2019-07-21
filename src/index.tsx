@@ -1,17 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import theme from "./theme";
 import { Provider } from "react-redux";
 import { configureStore } from "redux-starter-kit";
-import rootReducer from './store'
-import App from './App';
+import rootReducer from "./store";
+import App from "./App";
+import "./reset.css";
+import "typeface-roboto";
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: rootReducer
 });
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>, 
-  document.getElementById('root')
+  <MuiThemeProvider theme={theme}>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </MuiThemeProvider>,
+  document.getElementById("root")
 );
