@@ -16,11 +16,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default () => {
+export default ({ handleSubmit }: any) => {
   const classes = useStyles();
 
   return (
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit={handleSubmit} noValidate>
             <TextField
               variant="outlined"
               margin="normal"
