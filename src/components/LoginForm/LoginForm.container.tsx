@@ -23,11 +23,23 @@ const mapStateToProps = (state: any) => ({
 class LoginFormontainer extends Component<Props, State> {
 
 
+  submitForm = async (e: React.FormEvent<HTMLInputElement>) => {
+    console.log('here value', e.currentTarget.value)
+/*
+    const { setUser } = this.props;
+    try {
+      console.log('here');
+      await setUser(e);
+    } catch (e) {
+      throw e;
+    }
+    */
+  };
+
 
   render(): React.ReactNode {
-    // const { authUser, isAuth, token } = this.props;
     return (
-      <LoginForm />
+      <LoginForm hundleSubmit={this.submitForm} />
     );
   }
 }

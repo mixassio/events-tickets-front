@@ -12,11 +12,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default ({ handleSubmit }: any) => {
+export default ({ hundleSubmit }: any) => {
   const classes = useStyles();
 
   return (
-          <form onSubmit={handleSubmit} noValidate>
+          <form onSubmit={(e) => { e.preventDefault(); hundleSubmit(e); }}>
             <TextField
               variant="outlined"
               margin="normal"
