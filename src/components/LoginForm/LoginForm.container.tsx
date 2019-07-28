@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router";
+import useReactRouter from "use-react-router";
 import { actions } from "../../store";
 import LoginForm from "./LoginForm";
 import { ContainerProps } from "./types";
@@ -18,16 +20,47 @@ const mapStateToProps = (state: any) => ({
   token: state.token
 });
 
-const LoginFormContainer = ({ authUser, isAuth, token, setUser  }: ContainerProps) => {
+const LoginFormContainer = ({
+  authUser,
+  isAuth,
+  token,
+  setUser
+}: ContainerProps) => {
+  const { location } = useReactRouter();
+  const [redirectToReferrer, setRedirectToReferrer] = useState(false);
+
+  // todo переделать на асинхронный redux-экшн
+  // по итогу должно получиться так:
+  // const onFormSubmit = (values: Field[]) => }
+  //   authenticateUser(values)
+  //     .then(handleSuccessAuth)
+  //     .catch(handleBadAuth);
+  //
+  // }
   const onFormSubmit = (values: Field[]) => {
-    console.log(values)
-    const [{ value: userName}, ] = values;
-    const result = auth('zaglushka');
-    const { result: { token } } = result;
+    const [{ value: userName }] = values;
+    const result = auth("zaglushka");
+    const {
+      result: { token }
+    } = result;
     setUser({ userName, token });
+    handleSuccessAuth();
     // todo реализовать обработчик сабмита
   };
 
+  const handleSuccessAuth = () => {
+    setRedirectToReferrer(true);
+  };
+
+  const { from } = location.state || { from: { pathname: "/" } };
+
+  if (redirectToReferrer === true) {
+    debugger;
+
+    return <Redirect to={from} />;
+  }
+
+  debugger;
   return <LoginForm onSubmit={onFormSubmit} />;
 };
 
