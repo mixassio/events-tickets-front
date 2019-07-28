@@ -6,7 +6,8 @@ const authUser = createSlice({
   initialState: '', // user
   reducers: {
     setUser: (state, action) => {
-      console.log(state, action)
+      const { userName } = action.payload;
+      return userName;
     }
   }
 });
@@ -15,7 +16,9 @@ const isAuth = createSlice({
   slice: 'isAuth',
   initialState: false,
   reducers: {},
-  extraReducers: {},
+  extraReducers: {
+    [authUser.actions.setUser.toString()]: () => true
+  },
 })
 
 const token = createSlice({
@@ -23,7 +26,7 @@ const token = createSlice({
   initialState: '',
   reducers: {},
   extraReducers: {
-    [authUser.actions.setUser.toString()]: (state, { payload }) => payload
+    [authUser.actions.setUser.toString()]: (state, { payload: { token } }) => token
   },
 });
 

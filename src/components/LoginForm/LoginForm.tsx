@@ -17,13 +17,9 @@ export default ({ onSubmit }: Props) => {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const createFieldHandler = (setter: any) => (e: FormEvent) => {
-    e.target && setter(e.target.value);
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLInputElement>) => {
+  
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-
     const fields: Field[] = [
       { name: "email", value: email },
       { name: "password", value: password }
@@ -45,7 +41,10 @@ export default ({ onSubmit }: Props) => {
         autoComplete="email"
         autoFocus
         value={email}
-        onChange={createFieldHandler(setEmail)}
+        onChange={e=> {
+          e.preventDefault();
+          setEmail(e.target.value)
+        }}
       />
       <TextField
         variant="outlined"
@@ -58,7 +57,10 @@ export default ({ onSubmit }: Props) => {
         id="password"
         autoComplete="current-password"
         value={password}
-        onChange={createFieldHandler(setPassword)}
+        onChange={e=> {
+          e.preventDefault();
+          setPassword(e.target.value)
+        }}
       />
       <Button
         type="submit"

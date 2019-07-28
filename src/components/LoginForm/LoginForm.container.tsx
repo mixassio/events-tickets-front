@@ -4,6 +4,7 @@ import { actions } from "../../store";
 import LoginForm from "./LoginForm";
 import { ContainerProps } from "./types";
 import { Field } from "./types";
+import { auth } from "../../api";
 
 const { authUserActions } = actions;
 
@@ -19,7 +20,10 @@ const mapStateToProps = (state: any) => ({
 
 const LoginFormContainer = ({ authUser, isAuth, token, setUser  }: ContainerProps) => {
   const onFormSubmit = (values: Field[]) => {
-    console.table(values);
+    const [{ value: userName}, ] = values;
+    const result = auth('zaglushka');
+    const { result: { token } } = result;
+    setUser({ userName, token });
     // todo реализовать обработчик сабмита
   };
 
