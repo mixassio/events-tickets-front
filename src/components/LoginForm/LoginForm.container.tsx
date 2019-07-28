@@ -1,50 +1,32 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { actions } from "../../store";
-import LoginForm from './LoginForm';
-import { Props, State } from "./LoginForm.spec";
+import LoginForm from "./LoginForm";
+import { ContainerProps } from "./types";
+import { Field } from "./types";
 
-const {
-  authUserActions,
-} = actions;
+const { authUserActions } = actions;
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    setUser: (data: any) => dispatch(authUserActions.setUser(data)),
-
-  };
-};
+const mapDispatchToProps = (dispatch: any) => ({
+  // todo опиши, пожалуйста, данные на входе
+  setUser: (data: any) => dispatch(authUserActions.setUser(data))
+});
 const mapStateToProps = (state: any) => ({
   authUser: state.authUser,
   isAuth: state.isAuth,
-  token: state.token,
+  token: state.token
 });
 
-class LoginFormontainer extends Component<Props, State> {
-
-
-  submitForm = async (e: React.FormEvent<HTMLInputElement>) => {
-    console.log('here value', e.currentTarget.value)
-/*
-    const { setUser } = this.props;
-    try {
-      console.log('here');
-      await setUser(e);
-    } catch (e) {
-      throw e;
-    }
-    */
+const LoginFormContainer = ({ authUser, isAuth, token, setUser  }: ContainerProps) => {
+  const onFormSubmit = (values: Field[]) => {
+    console.table(values);
+    // todo реализовать обработчик сабмита
   };
 
-
-  render(): React.ReactNode {
-    return (
-      <LoginForm hundleSubmit={this.submitForm} />
-    );
-  }
-}
+  return <LoginForm onSubmit={onFormSubmit} />;
+};
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LoginFormontainer);
+)(LoginFormContainer);
