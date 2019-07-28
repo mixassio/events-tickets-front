@@ -20,6 +20,7 @@ const mapStateToProps = (state: any) => ({
 
 const LoginFormContainer = ({ authUser, isAuth, token, setUser  }: ContainerProps) => {
   const onFormSubmit = (values: Field[]) => {
+    console.log(values)
     const [{ value: userName}, ] = values;
     const result = auth('zaglushka');
     const { result: { token } } = result;
