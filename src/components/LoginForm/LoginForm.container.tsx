@@ -55,8 +55,6 @@ const LoginFormContainer = ({
   const { from } = location.state || { from: { pathname: "/" } };
 
   if (redirectToReferrer === true) {
-    debugger;
-
     return <Redirect to={from} />;
   }
 
